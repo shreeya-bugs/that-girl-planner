@@ -10,6 +10,7 @@ export default function Navbar() {
         <Link to="/planner">Planner</Link>
         <Link to="/habits">Habits</Link>
         <Link to="/selfcare">Self Care</Link>
+        <Link to="/vision">Vision 💖</Link>
       </div>
     </nav>
   );

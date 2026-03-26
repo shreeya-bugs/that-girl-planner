@@ -11,19 +11,45 @@ import {
 
 export default function Habits() {
   const [habitInput, setHabitInput] = useState("");
+
   const [habits, setHabits] = useState([
-    { text: "Workout 🏃‍♀️", done: false },
+    {
+      text: "Workout 🏃‍♀️",
+      days: [false, false, false, false, false, false, false],
+    },
   ]);
+
+  const days = ["M", "T", "W", "T", "F", "S", "S"];
+
+  const colors = [
+    "#ff69b4",
+    "#ff8fab",
+    "#c77dff",
+    "#80ed99",
+    "#ffd166",
+    "#00bbf9",
+  ];
+
+  const emojis = ["🏃‍♀️", "📚", "💧", "🧘‍♀️", "💻", "🌸"];
 
   const addHabit = () => {
     if (habitInput.trim() === "") return;
-    setHabits([...habits, { text: habitInput, done: false }]);
+
+    setHabits([
+      ...habits,
+      {
+        text: habitInput,
+        days: [false, false, false, false, false, false, false],
+      },
+    ]);
+
     setHabitInput("");
   };
 
-  const toggleHabit = (index) => {
+  const toggleHabit = (habitIndex, dayIndex) => {
     const updated = [...habits];
-    updated[index].done = !updated[index].done;
+    updated[habitIndex].days[dayIndex] =
+      !updated[habitIndex].days[dayIndex];
     setHabits(updated);
   };
 
@@ -40,14 +66,21 @@ export default function Habits() {
     }
   };
 
-  const data = habits.map((h, i) => ({
-    name: `H${i + 1}`,
-    progress: h.done ? 1 : 0,
-  }));
+  // 📊 Multi-line graph data
+  const data = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
+    (day, dayIndex) => {
+      const entry = { name: day };
+
+      habits.forEach((h, i) => {
+        entry[`habit${i}`] = h.days[dayIndex] ? 1 : 0;
+      });
+
+      return entry;
+    }
+  );
 
   return (
     <div className="app-wrapper">
-
       <h2>🌱 my habit garden</h2>
 
       {/* ➕ Add Habit */}
@@ -64,36 +97,48 @@ export default function Habits() {
       </div>
 
       {/* Habit List */}
-      {habits.map((h, index) => (
-        <div key={index} className="task-card">
+      {habits.map((h, habitIndex) => (
+        <div key={habitIndex} className="task-card">
+          <span>{h.text}</span>
 
-          <div>
-            <input
-              type="checkbox"
-              checked={h.done}
-              onChange={() => toggleHabit(index)}
-              className="me-2"
-            />
-            <span style={{ textDecoration: h.done ? "line-through" : "none" }}>
-              {h.text}
-            </span>
+          {/* Weekly checkboxes */}
+          <div style={{ display: "flex", gap: "8px" }}>
+            {h.days.map((d, dayIndex) => (
+              <div key={dayIndex} style={{ textAlign: "center" }}>
+                <input
+                  type="checkbox"
+                  checked={d}
+                  onChange={() =>
+                    toggleHabit(habitIndex, dayIndex)
+                  }
+                />
+                <div style={{ fontSize: "10px" }}>
+                  {days[dayIndex]}
+                </div>
+              </div>
+            ))}
           </div>
 
           <div>
-            <button className="custom-btn me-2" onClick={() => editHabit(index)}>
+            <button
+              className="custom-btn me-2"
+              onClick={() => editHabit(habitIndex)}
+            >
               ✏️
             </button>
-            <button className="custom-btn" onClick={() => deleteHabit(index)}>
+            <button
+              className="custom-btn"
+              onClick={() => deleteHabit(habitIndex)}
+            >
               ❌
             </button>
           </div>
-
         </div>
       ))}
 
       {/* 📊 Graph */}
       <div className="mt-5">
-        <h5>📊 my progress</h5>
+        <h5>📊 weekly habit tracking</h5>
 
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={data}>
@@ -101,18 +146,21 @@ export default function Habits() {
             <XAxis dataKey="name" />
             <YAxis domain={[0, 1]} />
             <Tooltip />
-            <Line
-              type="monotone"
-              dataKey="progress"
-              stroke="#ff69b4"
-              strokeWidth={3}
-              dot={{ r: 6, fill: "#ff69b4" }}
-            />
+
+            {habits.map((h, i) => (
+              <Line
+                key={i}
+                type="monotone"
+                dataKey={`habit${i}`}
+                stroke={colors[i % colors.length]}
+                strokeWidth={3}
+                dot={{ r: 5 }}
+                name={`${emojis[i % emojis.length]} ${h.text}`}
+              />
+            ))}
           </LineChart>
         </ResponsiveContainer>
-
       </div>
-
     </div>
   );
 }

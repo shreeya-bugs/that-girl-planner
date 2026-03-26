@@ -1,0 +1,172 @@
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+
+  background-image: url('./assets/background.png');
+  background-size: 180px;   /* controls size */
+  background-repeat: repeat;
+}
+
+/* 🌸 Headings */
+h1, h2 {
+  font-family: 'Pacifico', cursive;
+  color: #ff69b4;
+}
+
+/* 🌷 Wrapper */
+.app-wrapper {
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* 🧁 Floating boxes */
+.floating-box {
+  display: inline-block;
+  padding: 15px 25px;
+  margin: 10px;
+  background: #ffe4ec;
+  border-radius: 20px;
+  box-shadow: 4px 4px 0px #ffb6c1;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.floating-box:hover {
+  transform: rotate(-2deg) scale(1.05);
+}
+
+/* 🎀 Buttons */
+.custom-btn {
+  background: #ffb6c1;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  box-shadow: 3px 3px 0px #ff69b4;
+  color: white;
+  transition: 0.2s;
+}
+
+.custom-btn:hover {
+  transform: scale(1.05);
+}
+
+/* 💖 Input */
+.custom-input {
+  border-radius: 20px;
+}
+
+/* 🌱 Task cards */
+.task-card {
+  background: #ffe4ec;
+  padding: 12px 18px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-card:hover {
+  transform: scale(1.02);
+}
+
+/* ✨ Suggestion */
+.suggestion-box {
+  background: #ffd6e8;
+  padding: 15px;
+  border-radius: 20px;
+  font-weight: 600;
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* 🍓 Stickers */
+.sticker {
+  position: absolute;
+  font-size: 24px;
+}
+.app-wrapper {
+  min-height: 100vh;
+  padding: 40px;
+  position: relative;
+}
+
+/* title bigger */
+.main-title {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+/* emoji row */
+.emoji-row {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* floating layout */
+.floating-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* aesthetic filler */
+.aesthetic-section {
+  margin-top: 80px;
+  font-size: 18px;
+  color: #d63384;
+  text-align: center;
+}
+.custom-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #ffb6c1;
+}
+
+/* LOGO FONT */
+.logo {
+  font-family: 'Pacifico', cursive;
+  color: white;
+}
+
+/* NAV LINKS */
+.custom-navbar a {
+  margin-left: 15px;
+  text-decoration: none;
+  font-family: 'Quicksand', sans-serif;
+  color: white;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.custom-navbar a:hover {
+  color: #ffe4ec;
+}
+.app-wrapper {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 30px;
+  border-radius: 25px;
+  margin: 20px;
+}
+.content-box {
+  background: rgba(255, 240, 245, 0.9); /* soft pink-white */
+  padding: 30px;
+  border-radius: 25px;
+  max-width: 800px;
+  margin: 40px auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.content-box {
+  backdrop-filter: blur(6px);
+}
+.content-box {
+  color: #d63384;
+}
